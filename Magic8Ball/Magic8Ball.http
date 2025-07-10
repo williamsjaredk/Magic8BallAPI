@@ -1,0 +1,6 @@
+@Magic8Ball_HostAddress = http://localhost:5028
+
+GET {{Magic8Ball_HostAddress}}/Magic8Ball/
+Accept: application/json
+
+###
