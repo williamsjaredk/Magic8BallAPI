@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Magic8Ball
 {
-	public static class Answers
+	public  class Answer : IAnswer
 	{
-		private static List<string> AnswerList { get; } = new List<string>()
+		private List<string> AnswerList { get; } = new List<string>()
 		{
 			"It is certain.",
 			"It is decidedly so.",
@@ -33,7 +33,7 @@ namespace Magic8Ball
 			"Better not tell you now."
 		};
 		
-		public static string GetRandomAnswer()
+		public string GetRandomAnswer()
 		{
 			Random random = new();
 			return(AnswerList[random.Next(AnswerList.Count)]);

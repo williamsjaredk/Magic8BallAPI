@@ -1,5 +1,4 @@
-﻿using Magic8Ball.Models;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Magic8Ball.Controllers
@@ -10,24 +9,19 @@ namespace Magic8Ball.Controllers
 	{
 		[Route("v1/ask")]
 		[HttpGet]
-		public ActionResult<Wisdom> Get(string question)
+		public ActionResult<Wisdom> GetAnswer(string question)
 		{
-			if(question == null)
+			IAnswer answer = new Answer();
+			IWisdom response = new Wisdom(answer);
+
+			response.Question = question;
+			response.Id = Guid.NewGuid();
+			
+			if (response.GetAnswer() == null)
 			{
-				return NotFound();
+				return BadRequest();
 			}
 
-			if(question == string.Empty) 
-			{ 
-				return BadRequest(); 
-			}
-
-			Wisdom response = new Wisdom
-			{
-				Question = question,
-				Id = Guid.NewGuid(),
-				Answer = Wisdom.GetAnswer()
-			};
 			return Ok(response);
 		}
 	}
